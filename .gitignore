@@ -1,0 +1,10 @@
+/.python-version
+.idea
+.env
+*/migrations/*
+*/__pycache__/*
+*/*/__pycache__/*
+.venv
+env/
+venv/
+db.sqlite3

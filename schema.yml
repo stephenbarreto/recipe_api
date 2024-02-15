@@ -1,0 +1,365 @@
+openapi: 3.0.3
+info:
+  title: Recipes API
+  version: 1.0.0
+  description: Uma API simples para gerenciar receitas
+paths:
+  /chefs/create/:
+    post:
+      operationId: chefs_create_create
+      description: View para criar um novo chef.
+      tags:
+      - chefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /recipes/:
+    get:
+      operationId: recipes_list
+      description: |-
+        Este conjunto de visualizações fornece automaticamente ações "list", "create", "retrieve", "update" e "destroy"
+        para receitas.
+      parameters:
+      - in: query
+        name: chef_username
+        schema:
+          type: string
+        description: Nome de usuário do chef da receita
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Nome da receita
+      tags:
+      - recipes
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+          description: ''
+    post:
+      operationId: recipes_create
+      description: |-
+        Este conjunto de visualizações fornece automaticamente ações "list", "create", "retrieve", "update" e "destroy"
+        para receitas.
+      tags:
+      - recipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+          description: ''
+  /recipes/{id}/:
+    get:
+      operationId: recipes_retrieve
+      description: |-
+        Este conjunto de visualizações fornece automaticamente ações "list", "create", "retrieve", "update" e "destroy"
+        para receitas.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this recipe.
+        required: true
+      tags:
+      - recipes
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+          description: ''
+    put:
+      operationId: recipes_update
+      description: |-
+        Este conjunto de visualizações fornece automaticamente ações "list", "create", "retrieve", "update" e "destroy"
+        para receitas.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this recipe.
+        required: true
+      tags:
+      - recipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+          description: ''
+    patch:
+      operationId: recipes_partial_update
+      description: |-
+        Este conjunto de visualizações fornece automaticamente ações "list", "create", "retrieve", "update" e "destroy"
+        para receitas.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this recipe.
+        required: true
+      tags:
+      - recipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRecipe'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRecipe'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRecipe'
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+          description: ''
+    delete:
+      operationId: recipes_destroy
+      description: |-
+        Este conjunto de visualizações fornece automaticamente ações "list", "create", "retrieve", "update" e "destroy"
+        para receitas.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this recipe.
+        required: true
+      tags:
+      - recipes
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedRecipe:
+      type: object
+      description: Serializer para objetos Receita
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        chef:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: Nome
+          description: Nome da receita.
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descrição
+          description: Descrição da receita.
+        ingredients:
+          type: string
+          title: Ingredientes
+          description: Ingredientes da receita.
+        instructions:
+          type: string
+          title: Instruções
+          description: Instruções da receita.
+        prep_time:
+          type: string
+          description: 'Tempo de preparo da receita, formato: HH:MM:SS'
+        cook_time:
+          type: string
+          title: Tempo de cozimento
+          description: 'Tempo de cozimento da receita, formato: HH:MM:SS'
+        servings:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 1
+          format: int64
+          title: Porções
+          description: Porções da receita.
+    Recipe:
+      type: object
+      description: Serializer para objetos Receita
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        chef:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          title: Nome
+          description: Nome da receita.
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descrição
+          description: Descrição da receita.
+        ingredients:
+          type: string
+          title: Ingredientes
+          description: Ingredientes da receita.
+        instructions:
+          type: string
+          title: Instruções
+          description: Instruções da receita.
+        prep_time:
+          type: string
+          description: 'Tempo de preparo da receita, formato: HH:MM:SS'
+        cook_time:
+          type: string
+          title: Tempo de cozimento
+          description: 'Tempo de cozimento da receita, formato: HH:MM:SS'
+        servings:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 1
+          format: int64
+          title: Porções
+          description: Porções da receita.
+      required:
+      - chef
+      - cook_time
+      - created_at
+      - id
+      - ingredients
+      - instructions
+      - name
+      - prep_time
+      - updated_at
+    User:
+      type: object
+      description: Serializer para objetos de usuário.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        token:
+          type: string
+          readOnly: true
+          title: Token de autenticação
+          description: Token de autenticação do usuário para poder usar a API
+      required:
+      - id
+      - password
+      - token
+      - username
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
