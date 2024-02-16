@@ -64,6 +64,8 @@ http://127.0.0.1:8000/
 
 ## Documentação da API
 
+### URL API: https://recipe-api-sigma.vercel.app/
+
 #### [POST] /chefs/create/
 
 Descrição: Cadastrar um chef
@@ -85,7 +87,7 @@ Exemplo de Resposta:
 }
 ```
 
-### [GET] /recipes/
+#### [GET] /recipes/
 
 Descrição: Listar todas as receitas
 
@@ -116,7 +118,7 @@ Exemplo de Resposta:
 ]
 ```
 
-### [POST] /recipes/
+#### [POST] /recipes/
 
 Descrição: Cadastrar uma receita
 
@@ -150,7 +152,7 @@ Exemplo de Resposta:
 }
 ```
 
-### [GET] /recipes/{id}/
+#### [GET] /recipes/{id}/
 
 Descrição: Visualizar uma receita
 
@@ -177,7 +179,7 @@ Exemplo de Resposta:
 }
 ```
 
-### [PUT] /recipes/{id}/
+#### [PUT] /recipes/{id}/
 
 Descrição: Atualizar uma receita
 
@@ -217,7 +219,7 @@ Exemplo de Resposta:
 }
 ```
 
-### [DELETE] /recipes/{id}/
+#### [DELETE] /recipes/{id}/
 
 Descrição: Excluir uma receita
 
@@ -229,15 +231,16 @@ Exemplo de Requisição:
 
 Status da Resposta: 204 No Content
 
-### Token de Acesso
+#### Token de Acesso
 
-#### 572ac72bfc0cef2a54ee719b1772ba772b117a1b
+##### 572ac72bfc0cef2a54ee719b1772ba772b117a1b
 
 
 ### Teste você mesmo
 
 [![documentação](https://img.shields.io/badge/Documentação_Localhost-blue)](http://127.0.0.1:8000/api/schema/swagger-ui/#/)
+[![documentação](https://img.shields.io/badge/Documentação_vercel-blue)](https://recipe-api-sigma.vercel.app/api/schema/swagger-ui/#/)
 
-Para explorar a documentação completa da API, visite [http://127.0.0.1:8000/api/schema/swagger-ui/#/](http://127.0.0.1:8000/api/schema/swagger-ui/#/). Esta página fornece detalhes sobre endpoints, parâmetros e permite testar interativamente vários recursos oferecidos pela API.
+Para explorar a documentação completa da API, visite [https://recipe-api-sigma.vercel.app/api/schema/swagger-ui/#/](http://127.0.0.1:8000/api/schema/swagger-ui/#/). Esta página fornece detalhes sobre endpoints, parâmetros e permite testar interativamente vários recursos oferecidos pela API.
 
 Certifique-se de ter o servidor em execução localmente para acessar a documentação.
