@@ -17,4 +17,6 @@ urlpatterns = [
     # Adicionar as URLs dos aplicativos
     path('', include('recipe.urls')),  # Aplicativo de receitas.
     path('', include('core.urls')),  # Aplicativo com as configurações principais para uso de outros aplicativos.
-]
+] 
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
